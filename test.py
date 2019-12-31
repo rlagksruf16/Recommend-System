@@ -44,13 +44,21 @@ def similar_cosine(data, name1, name2):
     sum_name1 = 0
     sum_name2 = 0
     sum_name1_name2 = 0
-    for i in data[name1]:
-        if i in data[name2]:
+    for i in data[name1]-1:
+        if i in data[name2]-1:
             sum_name1 += pow(data[name1][i], 2)
             sum_name2 += pow(data[name2][i], 2)
             sum_name1_name2 += data[name1][i]* data[name2][i]
 
     return sum_name1_name2 / (math.sqrt(sum_name1) * math.sqrt(sum_name2))
 
+# test 용
+# print(similar_cosine(A,0,3))
+# print( )
+# print(similar_cosine(A,1,3))
+# print( )
+# print(similar_cosine(A,2,3))
 
-
+print(similar_cosine(A,1,3))
+def print_similar(data, name1, name2):
+    
