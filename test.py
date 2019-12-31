@@ -40,6 +40,7 @@ for i in range(len(s)):
 #                 count += 1
 #     return 1 / ( 1 + (sum/count))
 
+# 코사인 유사도 검사 함수
 def similar_cosine(data, name1, name2):
     sum_name1 = 0
     sum_name2 = 0
@@ -60,5 +61,21 @@ def similar_cosine(data, name1, name2):
 # print(similar_cosine(A,2,3))
 
 print(similar_cosine(A,1,3))
-def print_similar(data, name1, name2):
-    
+print(len(A))
+
+
+# 마지막 유사도 검사로 비슷한 사람 출력
+def print_similar(data, name1):
+    maxA = 0
+    person = 1000
+    for i in (0,len(data)-1):
+        if(name1 == i):
+            continue
+        else:
+            if(maxA < similar_cosine(data,name1,i)):
+                maxA = similar_cosine(data,name1,i)
+                person = i
+    return maxA
+
+
+print_similar(A,1)
