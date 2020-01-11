@@ -5,6 +5,7 @@ from numpy import diag
 from numpy import array
 from numpy import dot
 import math
+from numpy.linalg import norm
 
 # test data
 A = np.array([[4, 1, 1, 4], [1, 4, 2, 0], [2, 1, 4, 5], [1, 4, 1, 0]])
@@ -41,41 +42,41 @@ for i in range(len(s)):
 #     return 1 / ( 1 + (sum/count))
 
 # 코사인 유사도 검사 함수
-def similar_cosine(data, name1, name2):
-    sum_name1 = 0
-    sum_name2 = 0
-    sum_name1_name2 = 0
-    for i in data[name1]-1:
-        if i in data[name2]-1:
-            sum_name1 += pow(data[name1][i], 2)
-            sum_name2 += pow(data[name2][i], 2)
-            sum_name1_name2 += data[name1][i]* data[name2][i]
+# def similar_cosine(data, name1, name2):
+#     sum_name1 = 0
+#     sum_name2 = 0
+#     sum_name1_name2 = 0
+#     for i in len(A):
+#         if i in len(A):
+#             sum_name1 += pow(data[name1][i], 2)
+#             sum_name2 += pow(data[name2][i], 2)
+#             sum_name1_name2 += data[name1][i]* data[name2][i]
 
-    return sum_name1_name2 / (math.sqrt(sum_name1) * math.sqrt(sum_name2))
+#     return sum_name1_name2 / (math.sqrt(sum_name1) * math.sqrt(sum_name2))
 
-# test 용
-# print(similar_cosine(A,0,3))
-# print( )
-# print(similar_cosine(A,1,3))
-# print( )
-# print(similar_cosine(A,2,3))
+def cos_sim(a, b):
+    return dot(a, b)/(norm(a)*norm(b))
 
-print(similar_cosine(A,1,3))
-print(len(A))
+print(cos_sim(A[0], A[0]))
+print(cos_sim(A[0], A[1]))
+print(cos_sim(A[0], A[2]))
+print(cos_sim(A[0], A[3]))
+
+# full default 를 false
+
+# # 마지막 유사도 검사로 비슷한 사람 출력
+# def print_similar(data, name1):
+#     maxA = 0
+#     person = 1000
+#     for i in (0,len(data)-1):
+#         if(name1 == i):
+#             continue
+#         else:
+#             if(maxA < similar_cosine(data,name1,i)):
+#                 maxA = similar_cosine(data,name1,i)
+#                 person = i
+#     print(maxA)
+#     return maxA
 
 
-# 마지막 유사도 검사로 비슷한 사람 출력
-def print_similar(data, name1):
-    maxA = 0
-    person = 1000
-    for i in (0,len(data)-1):
-        if(name1 == i):
-            continue
-        else:
-            if(maxA < similar_cosine(data,name1,i)):
-                maxA = similar_cosine(data,name1,i)
-                person = i
-    return maxA
-
-
-print_similar(A,1)
+# print_similar(A,1)
