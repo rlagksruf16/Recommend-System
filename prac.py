@@ -14,6 +14,7 @@ A = np.array([[4, 1, 1, 4], [1, 4, 2, 0], [2, 1, 4, 5]])
 # Test set
 # [1,4,1,0]
 
+# B = np.array([4,1,1,4], [1,4,2,0],[2,1,4,5],[1,4,1,2])
 
 data = {"user" : ['U1', 'U2', 'U3'],
         "I1" : [4,1,2],
@@ -26,6 +27,7 @@ print(df)
 
 # svd 적용
 U, s , V = np.linalg.svd(A, full_matrices=True)
+
 
 # print(U)
 # print(s)
@@ -46,6 +48,9 @@ V = V[0:3,0:4]
 appA = np.dot(U, np.dot(S,V))
 
 print(appA)
+
+# --------------------------------------Test----------------------------
+
 
 
 
