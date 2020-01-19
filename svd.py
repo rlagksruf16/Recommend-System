@@ -15,6 +15,7 @@ start = timeit.default_timer()  #시작 시간
 U, s , V = np.linalg.svd(B, full_matrices=True)
 stop = timeit.default_timer()   #끝나는 시간
 
+
 print(stop-start)
 # print(U)
 # print(s)
@@ -22,6 +23,12 @@ print(stop-start)
 
 S = np.diag(s)
 # S가 3 X 3 의 형태임
+
+
+# svd 가 제대로 되엇는지 확인용
+# appA1 = np.dot(U, np.dot(S,V))
+
+# print(appA1)
 
 U = U[:,0:3]
 S = S[0:3,0:3]
