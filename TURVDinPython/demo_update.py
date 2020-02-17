@@ -23,21 +23,25 @@ X = geometric.geometry(m,n,kappa)
 Xi = X[:, 1:n-window]
 xdata = X[:,(n-window+1):]
 
-U, R, V = np.linalg.svd(Xi, full_matrices=True)
+U, R, V = np.linalg.svd(Xi, full_matrices=False)
 
 if(epsilon == 0):
     epsilon = math.sqrt(sum(np.diag(R) ** 2)) * 0.1
 #   truncation..0
 #  [idx, ~] = find(diag(R) < epsilon / 5);
 sum = 0
-max_sum = np.linalg.norm(R, ord = 'fro', axis=None, keepdims=False) ** 2
-for idx in range(1,np.size(R,1)+1):
-    sum = sum + R[idx-1,idx-1] ** 2
+# max_sum = np.linalg.norm(R, ord = 'fro', axis=None, keepdims=False) ** 2
+max_sum = np.linalg.norm(R, axis=None, keepdims=False) ** 2
+R = np.diag(R)
+# for idx in range(1,np.size(R,1)+1):
+for idx in range(1, R.shape[0]+1):
+    # idx = 1부터 R의 행 부분의 길이까지
+    sum = sum + R[idx-1][idx-1] ** 2
     if(math.sqrt(max_sum - sum) < epsilon * 0.9):
         break
 Us = U[:, 1:idx]
 Rs = R[1:idx, 1:idx]
-Vs = V[:, 1:idx]
-normE = np.linalg.norm(Xi - (np.dot(Us, np.dot(Rs,Vs))), ord='fro', axis=None, keepdims=False)
-
+Vs = V[1:idx, :]
+# normE = np.linalg.norm(Xi - (np.dot(Us, np.dot(Rs,Vs))), axis=None, keepdims=False)
+normE = np.linalg.norm(Xi - (np.dot(np.dot(Us,Rs),Vs)), axis=None, keepdims=False)
 

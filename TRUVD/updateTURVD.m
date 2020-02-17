@@ -25,7 +25,7 @@ function [Us, Rs, Vs, normEs] = updateTURVD(X, U, R, V, x, normE, ep)
     
 %% %%%%%%%%%%%%%%%%
 function [sigma, u, v] = power_iter(X)
-    citer = 50;
+    citer = 50; 
     v = randn(size(X,2),1); 
     u = randn(size(X,1),1);
     sigk = 0;
