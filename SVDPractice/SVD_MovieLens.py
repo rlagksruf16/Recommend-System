@@ -9,10 +9,10 @@ from numpy.linalg import norm
 import timeit
 
 # 데이터 파싱
-data = pd.io.parsers.read_csv('C:/ml-1m/ratings.dat', 
+data = pd.io.parsers.read_csv('/Users/hankyul/developer/Recommend-System/ml-1m/ratings.dat', 
     names=['user_id', 'movie_id', 'rating', 'time'],
     engine='python', delimiter='::')
-movie_data = pd.io.parsers.read_csv('C:/ml-1m/movies.dat',
+movie_data = pd.io.parsers.read_csv('/Users/hankyul/developer/Recommend-System/ml-1m/movies.dat',
     names=['movie_id', 'title', 'genre'],
     engine='python', delimiter='::')
 

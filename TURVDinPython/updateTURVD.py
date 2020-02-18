@@ -12,7 +12,7 @@ def power_iter(X):
     sigk = 0
     eps = 1.0e-4
     
-    for i in range(1,citer+1):
+    for _ in range(1,citer+1):
         v2 = np.dot(X,u)
         sigma = np.linalg.norm(v2)
         v2 = v2 / sigma
