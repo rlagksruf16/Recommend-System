@@ -24,7 +24,7 @@ def power_iter(X):
         if(abs(sigk - sigma) < eps ):
             break
         
-        return sigma, u, v
+    return sigma, u, v
         
         
 
