@@ -9,8 +9,8 @@ epsilon = 0.1;
 
 X = geometric(m,n, kappa);
 
-Xi = X(:,1:n-window);   // 이니셜 행렬
-xdata = X(:,(n-window+1):end);  // 하나하나 띄워서 Xi에 넣는다
+Xi = X(:,1:n-window); 
+xdata = X(:,(n-window+1):end);  
 
 [U, R, V] = svd(Xi, 'econ');
 if epsilon == 0
@@ -29,8 +29,8 @@ Us = U(:,1:idx); Rs = R(1:idx, 1:idx); Vs = V(:, 1:idx);
 normE = norm(Xi - Us * Rs * Vs','fro');
 
 for i = 1:size(xdata,2)
-   x = xdata(:,i);  // 하나하나씩 띄운다
-   [Us, Rs, Vs, normE] = updateTURVD(Xi,Us, Rs, Vs, x, normE, epsilon); //데이터가 추가되서 달라진다 -> 원칙으로는 다시 svd를 다시 돌린다 근데 만든 코드를 돌려서
+   x = xdata(:,i); 
+   [Us, Rs, Vs, normE] = updateTURVD(Xi,Us, Rs, Vs, x, normE, epsilon);
    Xi = [Xi, x];
    fprintf('%d th iteration, err = %g, trunc = %d\n',i, norm(Xi - Us * Rs * Vs','fro'), size(Us,2));
 end

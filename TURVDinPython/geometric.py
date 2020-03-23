@@ -2,6 +2,7 @@ import scipy.linalg as lin
 import numpy as np
 import math
 
+
 def geometry(m,n,kappa):
     p = min([m,n])
     Inkappa = -math.log(kappa)/(p-1)

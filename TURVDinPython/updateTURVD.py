@@ -1,11 +1,38 @@
-# power Iteration matlab 코드
-
 import numpy as np
 from numpy.linalg import norm
+import math
+import scipy.linalg as lin
+import RepGS1
+import chasing
+
+def updateTURVD(X, U, R, V, x, normE, ep): 
+    m, n = X.shape
+    u, h = RepGS(U,x)
+
+    # Us
+    # Rs 
+    # Vs
+
+    sigk1, u1, v1 = power_iter(np.linalg.inv(Rs))
+
+    if(abs(sigk1) > 0 ):
+        sigk1 = 1 / sigk1
+
+    if(np.sqrt(sigk1**2 + normE**2) > ep):
+        normEs = normE
+    else:
+        P2, Rs, Q3 = chasing(Rs, v1, u1)
+        Us = np.dot(Us, P2[:, 1:-2])
+        Vs = np.dot(Vs, Q3[:, 1:-2])
+        normEs = np.sqrt(sigk1**2 + normE**2)
+
+
+
+
 
 def power_iter(X):
     citer = 50
-# 원래 무한대로 곱해야 되는데 50번만 곱해도 유의미한 결과값이 나오기 때문에 50번만 곱한다.
+
 
     v = np.random.normal(size=(X.shape[1],1))
     u = np.random.normal(size=(X.shape[0],1))
@@ -27,26 +54,3 @@ def power_iter(X):
     return sigma, u, v
         
         
-
-
-
-
-# function [sigma, u, v] = power_iter(X)
-#     citer = 50; 
-#     //무한대로 곱해야하는데 citer 50번만 곱한다
-#     v = randn(size(X,2),1); 
-#     u = randn(size(X,1),1);
-#     sigk = 0;
-#     eps = 1.0e-4;
-#     for i = 1:citer
-#         v2 = X * u;
-#         sigma = norm(v2); v2 = v2 / sigma;
-#         u2 = X' * v2;
-#         X' 의 '는 켤레 전치를 의미한다.
-#         u2 = u2 / norm(u2);
-#         u = u2;
-#         v = v2;
-#         if abs(sigk - sigma) < eps 
-#             break;
-#         end
-#     end
