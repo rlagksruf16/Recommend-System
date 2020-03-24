@@ -19,8 +19,12 @@ X = geometric.geometry(m,n,kappa)
 # Test Code
 # print(X)
 # print(type(X))
-
+print(len(X))
+print(len(X[0]))
+print(X.shape)
 Xi = X[:, 1:n-window]
+print(Xi.shape)
+
 xdata = X[:,(n-window+1):]
 
 U, R, V = np.linalg.svd(Xi, full_matrices=False)
@@ -47,3 +51,12 @@ Vs = V[:,1:idx]
 
 normE = np.linalg.norm(Xi - (np.dot(np.dot(Us,Rs),np.transpose(Vs))), axis=None, keepdims=False)
 
+# for _ in range(1,):
+
+
+# for i = 1:size(xdata,2)
+#    x = xdata(:,i); 
+#    [Us, Rs, Vs, normE] = updateTURVD(Xi,Us, Rs, Vs, x, normE, epsilon);
+#    Xi = [Xi, x];
+#    fprintf('%d th iteration, err = %g, trunc = %d\n',i, norm(Xi - Us * Rs * Vs','fro'), size(Us,2));
+# end

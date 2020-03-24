@@ -41,7 +41,7 @@ def RepGS(V, v, gamma):
             print('dependence!')
         if(gamma):
             if(d<n):
-                v = RepGS(V,np.random.rand(n,1),)
+                v = RepGS(V,np.random.rand(n,1),1)
                 y = np.concatenate((n,0))
             else:
                 v = np.zeros((n,0))
