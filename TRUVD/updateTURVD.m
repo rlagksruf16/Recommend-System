@@ -23,7 +23,7 @@ function [Us, Rs, Vs, normEs] = updateTURVD(X, U, R, V, x, normE, ep)
         normEs = sqrt(sigk1^2 + normE^2);
     end
     
-%% %%%%%%%%%%%%%%%%
+%% %%%%%%%%%%%%%
 function [sigma, u, v] = power_iter(X)
     citer = 50; 
     v = randn(size(X,2),1); 
