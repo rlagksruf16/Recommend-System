@@ -5,6 +5,7 @@ import math
 from numpy.linalg import norm
 import scipy.linalg as lin
 import geometric
+import updateTURVD
 
 
 m = 500
@@ -51,12 +52,12 @@ Vs = V[:,1:idx]
 
 normE = np.linalg.norm(Xi - (np.dot(np.dot(Us,Rs),np.transpose(Vs))), axis=None, keepdims=False)
 
-# for _ in range(1,):
+for i in range(1,xdata.shape[1]):
+    x = xdata[:i+1]
 
+    Us, Rs, Vs, normE = updateTURVD.updateTURVD(Xi,Us, Rs, Vs, x, normE, epsilon)
+    Xi = np.concatenate((Xi, x))
 
-# for i = 1:size(xdata,2)
-#    x = xdata(:,i); 
-#    [Us, Rs, Vs, normE] = updateTURVD(Xi,Us, Rs, Vs, x, normE, epsilon);
-#    Xi = [Xi, x];
-#    fprintf('%d th iteration, err = %g, trunc = %d\n',i, norm(Xi - Us * Rs * Vs','fro'), size(Us,2));
-# end
+    print('%d th iteration, err=%f, trunc=%d'%(i,np.linalg.norm(Xi - (np.dot(np.dot(Us,Rs),np.transpose(Vs))), axis=None, keepdims=False),Us.shape[1]) )
+
+    

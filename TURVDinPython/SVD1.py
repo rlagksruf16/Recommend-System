@@ -5,10 +5,12 @@ import math
 from numpy.linalg import norm
 import scipy.linalg as lin
 import os
-# import sys
+import sys
 # sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 
 import updateTURVD
+
+np.set_printoptions(threshold=sys.maxsize)
 
 data = pd.io.parsers.read_csv('/Users/hankyul/developer/Recommend-System/ml-1m/ratings.dat', 
     names=['user_id', 'movie_id', 'rating', 'time'],
@@ -25,7 +27,10 @@ ratings_mat[data.movie_id.values-1, data.user_id.values-1] = data.rating.values
 
 ratings_mat = np.transpose(ratings_mat)
 
+sys.stdout = open('output.txt', 'w')
+
 # 배열 확인
+print(ratings_mat)
 print(ratings_mat.shape)
 print('파싱한 데이터 바꾸기')
 
@@ -33,11 +38,11 @@ Ri = ratings_mat[:,0:len(ratings_mat[0])-100]
 
 # 100개 뽑은 것
 Rt = ratings_mat[:,len(ratings_mat[0])-100:]
-print('Ri, Rt로 분리')
+print('Ri, Rt로 분리 완료')
 
 U, S, V = np.linalg.svd(Ri, full_matrices=False)
 
-print('svd')
+print('svd 완료')
 # print(U.shape)
 # print(S.shape)
 # print(V.shape)
@@ -64,17 +69,18 @@ Si = S[1:idx+1, 1:idx+1]
 V = np.transpose(V)
 # print(V.shape)
 Vi = V[:,1:idx+1]
-print('Ui, Si, Vi 로 자르기')
+print('Ui, Si, Vi 로 자르기 완료')
 
 normE = np.linalg.norm(Ri - (np.dot(np.dot(Ui,Si),np.transpose(Vi))), axis=None, keepdims=False)
 
-print('normE')
+print('normE 출력')
 print(normE)
 
 
 for i in range(1,Rt.shape[1]):
     x = Rt[:i+1]
-    
+    print("x")
+    print(x.shape)
     Ui, Si, Vi, normE = updateTURVD.updateTURVD(Ri, Ui, Si, Vi, x, normE, epsilon)
     # 속도 비교
 

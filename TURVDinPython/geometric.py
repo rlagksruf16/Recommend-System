@@ -1,7 +1,9 @@
 import scipy.linalg as lin
 import numpy as np
 import math
+import sys
 
+np.set_printoptions(threshold=sys.maxsize)
 
 def geometry(m,n,kappa):
     p = min([m,n])
@@ -15,8 +17,9 @@ def geometry(m,n,kappa):
     else:
         U = lin.orth(np.random.rand(m,m))
         V = lin.orth(np.random.rand(n,m))
-
+    # sys.stdout = open('output1.txt', 'w')
     X = np.dot(np.dot(U, np.diag(sigma)), V.transpose())
+    print(X)
     return X
 
 

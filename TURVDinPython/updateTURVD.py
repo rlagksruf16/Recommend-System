@@ -7,15 +7,14 @@ import RepGS1
 import chasing
 
 def updateTURVD(X, U, R, V, x, normE, ep): 
+    print("updateTURVD 시작")
     m, n = X.shape
-    u, h = RepGS1.RepGS(U,x,1)
+    # u, h = RepGS1.RepGS(U,x,1)
+    u, h = RepGS1.cgs(U)
 
     Us = np.concatenate((U,u))
     Rs = np.concatenate((np.concatenate((R,np.zeros((1,R.shape[1]))),h)))
     Vs = np.vstack((np.hstack((V,np.zeros((V.shape[0],1)))),np.hstack((np.zeros((1,V.shape[1])),1))))
-
-    # Rs = [[R; zeros(1, size(R,2))], h];
-    # Vs = [V, zeros(size(V,1),1); zeros(1,size(V,2)), 1];
 
     sigk1, u1, v1 = power_iter(np.linalg.inv(Rs))
 
